@@ -239,7 +239,7 @@ Minimal:
 
 
 Advanced:
-Scheduling tasks blocks up to 30 seconds trying to acquire a lock before raising an exception.
+Scheduling tasks blocks up to 30 seconds trying to acquire a lock before raising an exception and setting health_check_interval to let redis to do health check.
 
     .. code:: python
 
@@ -249,7 +249,10 @@ Scheduling tasks blocks up to 30 seconds trying to acquire a lock before raising
             'url': 'redis://localhost:6379/0',
             'default_timeout': 60 * 60,
             'blocking': True,
-            'blocking_timeout': 30
+            'blocking_timeout': 30,
+            'options':{
+                'health_check_interval':25
+            }
           }
         }
 

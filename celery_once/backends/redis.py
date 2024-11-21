@@ -76,7 +76,11 @@ def get_redis(settings):
             raise ImportError(
                 "You need to install the redis library in order to use Redis"
                 " backend (pip install redis)")
-        redis = StrictRedis(**parse_url(settings['url']))
+        kwargs = parse_url(settings['url'])
+        options = settings.get('options', None)
+        if options:
+            kwargs.update(options)
+        redis = StrictRedis(**kwargs)
     return redis
 
 
